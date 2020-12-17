@@ -11,45 +11,11 @@
 <body>
 	<div class="form">
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup_tab">Sign Up</a></li>
-        <li class="tab"><a href="#login_tab">Log In</a></li>
+        <li class="tab"><a href="#signup_tab">Sign Up</a></li>
+        <li class="tab active"><a href="#login_tab">Log In</a></li>
       </ul>
       
       <div class="tab-content">
-        <div id="signup_tab">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                User Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap">
-              <label>
-                Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          
-          <button type="submit" class="button button-block"/>Register</button>
-          
-          </form>
-
-        </div>
-        
         <div id="login_tab">   
           <h1>Welcome Back!</h1>
             <div class="field-wrap">
@@ -70,6 +36,36 @@
 
         </div>
         
+		<div id="signup_tab">   
+          <h1>Sign Up for Free</h1>
+          
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                User Name<span class="req">*</span>
+              </label>
+              <input id="uname" type="text" required autocomplete="off" />
+            </div>
+        
+            <div class="field-wrap">
+              <label>
+                Name<span class="req">*</span>
+              </label>
+              <input id="name" type="text"required autocomplete="off"/>
+            </div>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              Set A Password<span class="req">*</span>
+            </label>
+            <input id="pass" type="password"required autocomplete="off"/>
+          </div>
+          <span id="smsg" style="color:red"></span>
+          <button id="signup" type="submit" class="button button-block"/>Register</button>
+
+        </div>
+		
       </div><!-- tab-content -->
       
 </div> <!-- /form -->

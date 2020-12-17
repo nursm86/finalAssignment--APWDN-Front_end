@@ -34,6 +34,36 @@ var Validate = function(){
 	});
 };
 
+
+$("#signup").click(function(){
+	SignUp();
+});
+
+var SignUp = function(){
+	$.ajax({
+		url:"http://localhost:57613/api/user",
+		method:"POST",
+		header:"Content-Type:application/json",
+		data:{
+			userName:$("#uname").val(),
+			password:$("#pass").val(),
+			Name:$("#name").val()
+		},
+		complete:function(xmlhttp,status){
+			if(xmlhttp.status==201)
+			{
+				alert("Account Created Successfully now you can login");
+				window.location.href = "../login/Login&Signup.html";
+			}
+			else
+			{
+				$("#smsg").html("Something Went Wrong!!!");
+			}
+		}
+	});
+};
+
+
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
   var $this = $(this),

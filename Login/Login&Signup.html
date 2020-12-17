@@ -4,19 +4,19 @@
 	<title>Login</title>
 	<meta charset="utf-8">
 	<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="styles/jquery-3.5.1.js"></script>
-	<link rel="stylesheet" type="text/css" href="styles/style.css">
-	<script type="text/javascript" src="styles/myscript.js"></script>
+	<script type="text/javascript" src="../assets/js/jquery-3.5.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+	<script type="text/javascript" src="../assets/js/loginscript.js"></script>
 </head>
 <body>
 	<div class="form">
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#signup_tab">Sign Up</a></li>
+        <li class="tab"><a href="#login_tab">Log In</a></li>
       </ul>
       
       <div class="tab-content">
-        <div id="signup">   
+        <div id="signup_tab">   
           <h1>Sign Up for Free</h1>
           
           <form action="/" method="post">
@@ -50,28 +50,23 @@
 
         </div>
         
-        <div id="login">   
+        <div id="login_tab">   
           <h1>Welcome Back!</h1>
-          
-          <form action="/" method="post">
-          
             <div class="field-wrap">
             <label>
               User Name<span class="req">*</span>
             </label>
-            <input type="email"required autocomplete="off"/>
+            <input id="userName" type="text"required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off"/>
+            <input id="password" type="password"required autocomplete="off"/>
           </div>
-          
-          <button class="button button-block"/>Log In</button>
-          
-          </form>
+		  <span id="msg" style="color:red"></span>
+          <button id="login" class="button button-block"/>Log In</button>
 
         </div>
         

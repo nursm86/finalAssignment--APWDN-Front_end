@@ -1,5 +1,40 @@
 $(document).ready(function(){
-	$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+$("#userName").focus(function(){
+	$("#msg").html("");
+});
+
+$("#password").focus(function(){
+	$("#msg").html("");
+});
+
+$("#login").click(function(){
+		Validate();
+});
+
+var Validate = function(){
+	$.ajax({
+		url:"http://localhost:57613/api/user/login",
+		method:"POST",
+		header:"Content-Type:application/json",
+		data:{
+			userName:$("#userName").val(),
+			password:$("#password").val()
+		},
+		complete:function(xmlhttp,status){
+			if(xmlhttp.status==202)
+			{
+				window.location.href = "../Post/index.html";
+			}
+			else
+			{
+				$("#msg").html("Wrong User Name or password!!");
+			}
+		}
+	});
+};
+
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
   var $this = $(this),
       label = $this.prev('label');

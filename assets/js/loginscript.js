@@ -9,7 +9,7 @@ $("#password").focus(function(){
 });
 
 $("#login").click(function(){
-		Validate();
+	Validate();
 });
 
 var Validate = function(){

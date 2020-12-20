@@ -16,20 +16,29 @@ $(document).ready(function(){
     }
     params = getParams();
     var postId = unescape(params.id);
-    
-    var addComment = function(){
+
+
+    $("#editpost").click(function(){
+        editPost();
+    });
+
+    var editPost = function(){
         $.ajax({
-            url:"http://localhost:57613/api/post/"+postId+"/comments",
-            method:"POST",
+            url:"http://localhost:57613/api/post/"+postId,
+            method:"PUT",
             header:"Content-Type:application/json",
             data:{
-                userId: id,
-                comment1 : $('#comment').val()
+                userId : id,
+                postDescription : $("#description").val(),
+                image : $("#image").val()
+            },
+            headers: {
+                "Authorization": "Basic " + btoa(uname+ ":" + pass)
             },
             complete:function(xmlhttp,status){
                 if(xmlhttp.status==200)
                 {
-                    loadPostInfo();
+                    window.location.href = "../post/index.html";
                 }
                 else
                 {
@@ -51,21 +60,8 @@ $(document).ready(function(){
                 if(xmlhttp.status==200)
                 {
                     var data=xmlhttp.responseJSON;
-    
-                    var str='';
-                    if(data.image !=""){
-                        str +='<img class="item-image" src="'+data.image+'"></img>';
-                    }
-                    str +='<b class="text">'+data.postDescription+'</b>';
-                    str +='<input id="comment" type="text" placeholder="Type your Comments here" style="width:185px;font-family:consolas;margin-top:5px;" class="form-control">';
-                    str +='<button id="add" class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;"/>Comment</button>';
-
-                    for(var i=0;i<data.comments.length;i++){
-                        str += '<h4 class="add-to-cart" style="margin-top: 10%; margin-bottom: 0%;">'+data.comments[i].user.name+'</h4>';
-                        str += '<h3 class="text">'+data.comments[i].comment1+'</h3>';
-                        str += '<a class="add-to-cart" href="#">edit  </a><a href="#">delete</a>';
-                    }
-                    $('#postInfo').html(str);
+                    $('#description').val(data.postDescription);
+                    $('#image').val(data.image);
                 }
                 else
                 {
@@ -75,8 +71,4 @@ $(document).ready(function(){
         });
     };
     loadPostInfo();
-
-    $('#add').click(function(){
-        alert("ami aij");
-    });
 });

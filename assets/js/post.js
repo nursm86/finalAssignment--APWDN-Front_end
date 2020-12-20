@@ -3,9 +3,36 @@ $(document).ready(function(){
     var pass = Cookies.get('pass');
     var id = Cookies.get('id');
 
-    $("#view").click(function(){
-        alert("hoise to");
+    $("#addpost").click(function(){
+        addPost();
     });
+
+    var addPost = function(){
+        $.ajax({
+            url:"http://localhost:57613/api/post",
+            method:"POST",
+            header:"Content-Type:application/json",
+            data:{
+                userId : id,
+                postDescription : $("#description").val(),
+                image : $("#image").val(),
+                postDate: Date($.now())
+            },
+            headers: {
+                "Authorization": "Basic " + btoa(uname+ ":" + pass)
+            },
+            complete:function(xmlhttp,status){
+                if(xmlhttp.status==201)
+                {
+                    window.location.href = "../post/index.html";
+                }
+                else
+                {
+                    $("#smsg").html("Something Went Wrong!!!");
+                }
+            }
+        });
+    };
 
     var loadPosts = function(){
         $.ajax({
@@ -22,13 +49,16 @@ $(document).ready(function(){
     
                         var str='';
                         for (var i = 0; i < data.length; i++) {
-                            str +='<div class="card-product col-md-4">'
+                            str +='<div class="card-product col-md-4">';
                             if(data[i].image == ""){
                                 str +='<b class="add-to-cart">'+data[i].user.name+'</b></br>';
                                 str +='<br class="text">'+data[i].postDescription+'</>';
                                 str += '<div class="add-to-cart"><span ><b>'+data[i].likes.length+'likes</b><b><i class="fa fa-hand-o-right"></i>'+data[i].comments.length+'comments</b></span></div>';
                                 str += '<div class="add-to-cart"><button class="btn btn-warning" style="width:185px;font-family:consolas;margin-top:5px;">Like</button></span></div>';
                                 str += '<div class="add-to-cart"><a class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;" href="../post/post.html?id='+data[i].postId+'">View the post</a></span></div>';
+                                if(data[i].user.userId == id){
+                                    str += '<div class="add-to-cart"><a class="btn btn-warning" style="width:185px;font-family:consolas;margin-top:5px;" href="../post/editPost.html?id='+data[i].postId+'">Edit</a></span></div>';
+                                }
                             }
                             else{
                                 str +='<b class="add-to-cart">'+data[i].user.name+'</b></br>';
@@ -37,6 +67,9 @@ $(document).ready(function(){
                                 str += '<div class="add-to-cart"><span ><b>'+data[i].likes.length+'likes</b><b><i class="fa fa-hand-o-right"></i>'+data[i].comments.length+'comments</b></span></div>';
                                 str += '<div class="add-to-cart"><button class="btn btn-warning" style="width:185px;font-family:consolas;margin-top:5px;">Like</button></span></div>';
                                 str += '<div class="add-to-cart"><a class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;" href="../post/post.html?id='+data[i].postId+'">View the post</a></span></div>';
+                                if(data[i].user.userId == id){
+                                    str += '<div class="add-to-cart"><a class="btn btn-warning" style="width:185px;font-family:consolas;margin-top:5px;" href="../post/editPost.html?id='+data[i].postId+'">Edit</a></span></div>';
+                                }
                             }
                             str +='</div>';
                         }

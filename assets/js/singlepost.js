@@ -16,7 +16,7 @@ $(document).ready(function(){
     }
     params = getParams();
     var postId = unescape(params.id);
-    
+
     var addComment = function(){
         $.ajax({
             url:"http://localhost:57613/api/post/"+postId+"/comments",
@@ -26,10 +26,14 @@ $(document).ready(function(){
                 userId: id,
                 comment1 : $('#comment').val()
             },
+            headers: {
+                "Authorization": "Basic " + btoa(uname+ ":" + pass)
+            },
             complete:function(xmlhttp,status){
-                if(xmlhttp.status==200)
+                if(xmlhttp.status==201)
                 {
                     loadPostInfo();
+                    $('#comment').val("");
                 }
                 else
                 {
@@ -56,13 +60,10 @@ $(document).ready(function(){
                     if(data.image !=""){
                         str +='<img class="item-image" src="'+data.image+'"></img>';
                     }
-                    str +='<b class="text">'+data.postDescription+'</b>';
-                    str +='<input id="comment" type="text" placeholder="Type your Comments here" style="width:185px;font-family:consolas;margin-top:5px;" class="form-control">';
-                    str +='<button id="add" class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;"/>Comment</button>';
-
+                    str +='<h2><b class="text">'+data.postDescription+'</b></h2>';
                     for(var i=0;i<data.comments.length;i++){
-                        str += '<h4 class="add-to-cart" style="margin-top: 10%; margin-bottom: 0%;">'+data.comments[i].user.name+'</h4>';
-                        str += '<h3 class="text">'+data.comments[i].comment1+'</h3>';
+                        str += '<h5 class="add-to-cart" style="margin-top: 10%; margin-bottom: 0%;">'+data.comments[i].user.name+'</h5>';
+                        str += '<h4 class="text">'+data.comments[i].comment1+'</h4>';
                         str += '<a class="add-to-cart" href="#">edit  </a><a href="#">delete</a>';
                     }
                     $('#postInfo').html(str);
@@ -75,8 +76,7 @@ $(document).ready(function(){
         });
     };
     loadPostInfo();
-
-    $('#add').click(function(){
-        alert("ami aij");
+    $("#addcmnt").click(function(){
+       addComment(); 
     });
 });

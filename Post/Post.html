@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="../assets/css/mystyle.css?v=<?php echo time();?>">
 		<script type="text/javascript" src="../assets/js/jquery-3.5.1.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-		<script type="text/javascript" src="../assets/js/singlepost.js?v=<?php echo time();?>"></script>
+		<script type="text/javascript" src="../assets/js/singlepost.js"></script>
 	</head>
 	<body>
         <div class="header-index">
@@ -14,17 +14,15 @@
                 <a class="btn btn-success" href="../Post/index.html">Home</a>
                 <a class="btn btn-danger" href="../Login/Login&Signup.html">Logout</a>
             </div>	
-        </div>
+		</div>
 
-        <div class="center">
-            <table>
-                <tr>
-                    <td id="postInfo">
-                        
-                    </td>
-                </tr>
-            </table>
+		
+        <div class="center" id="postInfo">
             
-        </div>	
+		</div>
+		<div class="center">
+			<input id="comment" type="text" placeholder="Type your Comments here" style="width:185px;font-family:consolas;margin-top:5px;" class="form-control" required>
+			<button id="addcmnt" class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;"/>Comment</button>
+		</div>
 	</body>
 </html>

@@ -22,6 +22,10 @@ $(document).ready(function(){
         editPost();
     });
 
+    $("#deletepost").click(function(){
+        deletePost();
+    });
+
     var editPost = function(){
         $.ajax({
             url:"http://localhost:57613/api/post/"+postId,
@@ -37,6 +41,27 @@ $(document).ready(function(){
             },
             complete:function(xmlhttp,status){
                 if(xmlhttp.status==200)
+                {
+                    window.location.href = "../post/index.html";
+                }
+                else
+                {
+                    $("#smsg").html("Something Went Wrong!!!");
+                }
+            }
+        });
+    };
+
+    var deletePost = function(){
+        $.ajax({
+            url:"http://localhost:57613/api/post/"+postId,
+            method:"DELETE",
+            header:"Content-Type:application/json",
+            headers: {
+                "Authorization": "Basic " + btoa(uname+ ":" + pass)
+            },
+            complete:function(xmlhttp,status){
+                if(xmlhttp.status==204)
                 {
                     window.location.href = "../post/index.html";
                 }

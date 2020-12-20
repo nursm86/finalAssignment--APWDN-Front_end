@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="../assets/css/mystyle.css?v=<?php echo time();?>">
+		<script type="text/javascript" src="../assets/js/jquery-3.5.1.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+		<script type="text/javascript" src="../assets/js/comment.js"></script>
+	</head>
+	<body>
+        <div class="header-index">
+            <a class="btn"><b class="text-white name">Post and Comment Platform</b></a>
+            <div class="pull-right">
+                <a class="btn btn-success" href="../Post/index.html">Home</a>
+                <a class="btn btn-danger" href="../Login/Login&Signup.html">Logout</a>
+            </div>	
+        </div>
+        
+		
+        <div class="center" id="postInfo">
+            
+		</div>
+		<div class="center">
+			<input id="editcomment" type="text" placeholder="Type your Comments here" style="height:50px; width:500px;font-family:consolas;margin-top:5px;" class="form-control" required>
+            <button id="editcmnt" class="btn btn-success" style="width:185px;font-family:consolas;margin-top:5px;"/>Update Comment</button>
+            <button id="deletecmnt" class="btn btn-danger" style="width:185px;font-family:consolas;margin-top:5px;"/>Delete</button>
+		</div>
+	</body>
+</html>

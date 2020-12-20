@@ -15,25 +15,33 @@ $(document).ready(function(){
         return params;
     }
     params = getParams();
-    var postId = unescape(params.id);
+    var postId = unescape(params.pid);
+    var cmntId = unescape(params.cid);
 
-    var addComment = function(){
+    $("#editcmnt").click(function(){
+        editComment();
+    });
+
+    $("#deletecmnt").click(function(){
+        deleteComment();
+    });
+
+    var editComment = function(){
         $.ajax({
-            url:"http://localhost:57613/api/post/"+postId+"/comments",
-            method:"POST",
+            url:"http://localhost:57613/api/post/"+postId+"/comments/"+cmntId,
+            method:"PUT",
             header:"Content-Type:application/json",
             data:{
-                userId: id,
-                comment1 : $('#comment').val()
+                userId : id,
+                comment1 : $("#editcomment").val()
             },
             headers: {
                 "Authorization": "Basic " + btoa(uname+ ":" + pass)
             },
             complete:function(xmlhttp,status){
-                if(xmlhttp.status==201)
+                if(xmlhttp.status==200)
                 {
-                    loadPostInfo();
-                    $('#comment').val("");
+                    window.location.href = "../post/Post.html?id="+postId;
                 }
                 else
                 {
@@ -43,9 +51,30 @@ $(document).ready(function(){
         });
     };
 
-    var loadPostInfo = function(){
+    var deleteComment = function(){
         $.ajax({
-            url:"http://localhost:57613/api/post/"+postId,
+            url:"http://localhost:57613/api/post/"+postId+"/comments/"+cmntId,
+            method:"DELETE",
+            header:"Content-Type:application/json",
+            headers: {
+                "Authorization": "Basic " + btoa(uname+ ":" + pass)
+            },
+            complete:function(xmlhttp,status){
+                if(xmlhttp.status==204)
+                {
+                    window.location.href = "../post/Post.html?id="+postId;
+                }
+                else
+                {
+                    $("#smsg").html("Something Went Wrong!!!");
+                }
+            }
+        });
+    };
+
+    var loadComment = function(){
+        $.ajax({
+            url:"http://localhost:57613/api/post/"+postId+"/comments/"+cmntId,
             method:"GET",
             header:"Content-Type:application/json",
             headers: {
@@ -55,20 +84,10 @@ $(document).ready(function(){
                 if(xmlhttp.status==200)
                 {
                     var data=xmlhttp.responseJSON;
-    
-                    var str='';
-                    if(data.image !=""){
-                        str +='<img class="item-image" src="'+data.image+'"></img>';
+                    $('#editcomment').val(data.comment1);
+                    if(id != data.userId){
+                        $('#editcmnt').hide();
                     }
-                    str +='<h2><b class="text">'+data.postDescription+'</b></h2>';
-                    for(var i=0;i<data.comments.length;i++){
-                        str += '<h5 class="add-to-cart" style="margin-top: 10%; margin-bottom: 0%;">'+data.comments[i].user.name+'</h5>';
-                        str += '<h4 class="text">'+data.comments[i].comment1+'</h4>';
-                        if(data.comments[i].user.userId== id || data.user.userId == id){
-                            str += '<a class="add-to-cart" href="../post/editComment.html?cid='+data.comments[i].commentId+'&pid='+data.postId+'">edit</a>';
-                        }
-                    }
-                    $('#postInfo').html(str);
                 }
                 else
                 {
@@ -77,8 +96,5 @@ $(document).ready(function(){
             }
         });
     };
-    loadPostInfo();
-    $("#addcmnt").click(function(){
-       addComment(); 
-    });
+    loadComment();
 });

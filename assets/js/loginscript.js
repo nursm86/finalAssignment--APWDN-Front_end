@@ -22,11 +22,12 @@ var Validate = function(){
 			password:$("#password").val()
 		},
 		complete:function(xmlhttp,status){
-			if(xmlhttp.status==202)
+			if(xmlhttp.status==200)
 			{
 				Cookies.set("uname",$("#userName").val());
 				//var cookieVal = Cookies.get('uname');
 				Cookies.set("pass",$("#password").val());
+				Cookies.set("id",xmlhttp.responseJSON);
 				window.location.href = "../Post/index.html";
 			}
 			else

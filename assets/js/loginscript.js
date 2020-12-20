@@ -24,6 +24,9 @@ var Validate = function(){
 		complete:function(xmlhttp,status){
 			if(xmlhttp.status==202)
 			{
+				Cookies.set("uname",$("#userName").val());
+				//var cookieVal = Cookies.get('uname');
+				Cookies.set("pass",$("#password").val());
 				window.location.href = "../Post/index.html";
 			}
 			else

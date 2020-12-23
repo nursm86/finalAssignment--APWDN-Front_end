@@ -57,7 +57,7 @@ $(document).ready(function(){
                     var data=xmlhttp.responseJSON;
     
                     var str='';
-                    if(data.image !=""){
+                    if(!(data.image =="" || data.image ==null)){
                         str +='<img class="item-image" src="'+data.image+'"></img>';
                     }
                     str +='<h2><b class="text">'+data.postDescription+'</b></h2>';

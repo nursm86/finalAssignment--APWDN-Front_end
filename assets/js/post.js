@@ -46,7 +46,6 @@ $(document).ready(function(){
                 if(xmlhttp.status==200)
                 {
                     var data=xmlhttp.responseJSON;
-    
                         var str='';
                         var likeflag = false;
                         for (var i = 0; i < data.length; i++) {
@@ -57,7 +56,7 @@ $(document).ready(function(){
                                     likeflag = true;
                                 }
                             });
-                            if(data[i].image == ""){
+                            if(data[i].image == "" || data[i].image == null){
                                 str +='<b class="add-to-cart">'+data[i].user.name+'</b></br>';
                                 str +='<br class="text">'+data[i].postDescription+'</>';
                                 str += '<div class="add-to-cart"><span ><b>'+data[i].likes.length+'likes</b><b><i class="fa fa-hand-o-right"></i>'+data[i].comments.length+'comments</b></span></div>';
